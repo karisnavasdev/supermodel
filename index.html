@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super Model — Romantic AI Meme</title>
+  <meta name="description" content="Super Model is a romantic AI meme. Contract: 0xcomingsoon.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06101c;
+      --ink: #eef5ff;
+      --muted: #a9bdd8;
+      --line: rgba(190, 220, 255, 0.16);
+      --blue: #8ecbff;
+      --blue-2: #3d8dff;
+      --rose: #ff8fb3;
+      --gold: #f4d48a;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Outfit", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--sans);
+      background:
+        radial-gradient(900px 520px at 8% -10%, rgba(61, 141, 255, 0.28), transparent 60%),
+        radial-gradient(680px 460px at 100% 0%, rgba(255, 143, 179, 0.16), transparent 55%),
+        radial-gradient(820px 620px at 80% 110%, rgba(40, 90, 180, 0.28), transparent 60%),
+        var(--bg);
+    }
+    body.lock { overflow: hidden; }
+    img { max-width: 100%; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    ::selection { background: rgba(61, 141, 255, 0.45); }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hearts span {
+      position: absolute;
+      bottom: -12vh;
+      left: var(--x);
+      width: var(--s);
+      height: var(--s);
+      opacity: 0;
+      animation: drift-heart linear infinite;
+      animation-duration: var(--d);
+      animation-delay: var(--delay);
+    }
+    .hearts span:nth-child(even) { animation-name: drift-heart-alt; }
+    .hearts b {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--c);
+      border-radius: 4px 0 0 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 0 14px var(--glow);
+      animation: pulse-heart 2.8s ease-in-out infinite;
+    }
+    .hearts b::before,
+    .hearts b::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .hearts b::before { top: -50%; left: 0; }
+    .hearts b::after { left: 50%; top: 0; }
+    @keyframes drift-heart {
+      0% { transform: translate3d(0, 8vh, 0) scale(0.65) rotate(-12deg); opacity: 0; }
+      12% { opacity: var(--o); }
+      55% { transform: translate3d(28px, -58vh, 0) scale(1) rotate(6deg); }
+      100% { transform: translate3d(-18px, -125vh, 0) scale(1.08) rotate(14deg); opacity: 0; }
+    }
+    @keyframes drift-heart-alt {
+      0% { transform: translate3d(0, 6vh, 0) scale(0.8) rotate(10deg); opacity: 0; }
+      14% { opacity: var(--o); }
+      60% { transform: translate3d(-34px, -62vh, 0) scale(1.05) rotate(-8deg); }
+      100% { transform: translate3d(16px, -128vh, 0) scale(0.9) rotate(-16deg); opacity: 0; }
+    }
+    @keyframes pulse-heart {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.35); }
+    }
+
+    .nav, main, footer { position: relative; z-index: 1; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    section { scroll-margin-top: 88px; padding: 84px 0; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(6, 16, 28, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .nav-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-height: 74px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-right: auto;
+    }
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(244, 212, 138, 0.7);
+    }
+    .brand strong {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .nav-links a:hover { color: white; }
+    .nav-socials { display: flex; gap: 8px; }
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: white;
+      text-decoration: none;
+    }
+    .icon-btn:hover { border-color: rgba(142, 203, 255, 0.7); background: rgba(61, 141, 255, 0.18); }
+    .icon-btn svg { width: 16px; height: 16px; display: block; }
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      margin: 5px auto;
+      background: white;
+    }
+
+    .hero { padding: 42px 0 28px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.86fr) 1.2fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+    }
+    .eyebrow i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--rose);
+      display: inline-block;
+    }
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(4.4rem, 8vw, 7.2rem);
+      line-height: 0.82;
+      letter-spacing: -0.03em;
+    }
+    h1 em {
+      font-style: italic;
+      background: linear-gradient(110deg, #fff 10%, #f4d48a 46%, #ff8fb3 88%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lede {
+      max-width: 42ch;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-weight: 300;
+      font-size: 1.08rem;
+      line-height: 1.6;
+    }
+    .ca-card {
+      margin-top: 26px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 12px 12px 16px;
+      border-radius: 18px;
+      background: rgba(8, 20, 40, 0.72);
+      border: 1px solid var(--line);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .ca-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .ca-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7dffb3;
+      box-shadow: 0 0 0 0 rgba(125, 255, 179, 0.65);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 8px transparent; }
+    }
+    .ca-card code {
+      font-family: Consolas, "Cascadia Code", monospace;
+      font-size: 1.2rem;
+      color: white;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .btn svg { width: 16px; height: 16px; }
+    .btn-primary {
+      background: linear-gradient(180deg, #b7dcff, #3d8dff);
+      color: #06101c;
+      box-shadow: 0 10px 30px rgba(61, 141, 255, 0.32);
+    }
+    .btn-primary:hover { filter: brightness(1.05); }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--line);
+    }
+    .btn-ghost:hover { border-color: rgba(142, 203, 255, 0.7); }
+    .btn-telegram {
+      background: rgba(80, 170, 230, 0.14);
+      border-color: rgba(120, 200, 255, 0.35);
+    }
+    .btn-telegram:hover { background: rgba(80, 170, 230, 0.24); }
+    .frame {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(244, 212, 138, 0.42);
+      box-shadow: var(--shadow), 0 0 80px rgba(61, 141, 255, 0.18);
+      background: #0b1830;
+    }
+    .frame img { display: block; width: 100%; height: auto; }
+
+    .ticker {
+      overflow: hidden;
+      border-block: 1px solid var(--line);
+      background: rgba(8, 18, 36, 0.55);
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 32s linear infinite;
+    }
+    .ticker-group {
+      display: flex;
+      gap: 28px;
+      padding: 14px 14px;
+      color: var(--muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+    .ticker-group b { color: var(--gold); font-weight: 500; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .kicker {
+      margin: 0 0 10px;
+      color: var(--blue);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+    }
+    h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.7rem, 5vw, 4.5rem);
+      line-height: 0.92;
+    }
+    .sub {
+      max-width: 58ch;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 42px;
+      align-items: center;
+    }
+    .portrait {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .portrait img { display: block; width: 100%; height: 520px; object-fit: cover; object-position: center top; }
+
+    blockquote { margin: 10px 0 0; padding: 0; text-align: center; }
+    blockquote p {
+      margin: 0;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.15;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .stat, .step, .phase, .social-card {
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    }
+    .stat { padding: 22px; }
+    .stat span { display: block; color: var(--muted); font-size: 0.88rem; margin-bottom: 8px; }
+    .stat b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    .gallery-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.9fr 0.9fr 1.05fr;
+      grid-template-rows: 230px 250px 250px;
+      gap: 14px;
+    }
+    .shot {
+      position: relative;
+      overflow: hidden;
+      border: 0;
+      padding: 0;
+      border-radius: 22px;
+      background: #10203a;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .shot:hover img { transform: scale(1.05); }
+    .shot span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 42px 14px 12px;
+      background: linear-gradient(transparent, rgba(4, 10, 22, 0.86));
+      font-size: 0.92rem;
+    }
+    .shot-portrait { grid-column: 1; grid-row: 1 / span 2; }
+    .shot-silk { grid-column: 2 / span 2; grid-row: 1; }
+    .shot-rose { grid-column: 4; grid-row: 1 / span 2; }
+    .shot-window { grid-column: 2; grid-row: 2 / span 2; }
+    .shot-balcony { grid-column: 3; grid-row: 2 / span 2; }
+    .shot-vanity { grid-column: 1; grid-row: 3; }
+    .shot-poster { grid-column: 4; grid-row: 3; }
+
+    .phases, .steps, .socials {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .phases { grid-template-columns: repeat(4, 1fr); }
+    .phase, .step { padding: 22px; }
+    .phase em, .step em {
+      display: block;
+      color: var(--gold);
+      font-style: normal;
+      letter-spacing: 0.16em;
+      font-size: 0.75rem;
+      margin-bottom: 10px;
+    }
+    .phase h3, .step h3, .social-card strong {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 500;
+    }
+    .phase p, .step p, .social-card span { margin: 0; color: var(--muted); line-height: 1.55; font-weight: 300; }
+    .steps { grid-template-columns: repeat(3, 1fr); }
+    .socials { grid-template-columns: 1fr 1fr; }
+    .social-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 180px;
+      padding: 24px;
+      text-decoration: none;
+    }
+    .social-card:hover { border-color: rgba(142, 203, 255, 0.65); }
+    .social-card small {
+      color: var(--blue);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 40px;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .footer-row a { color: var(--ink); }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: rgba(3, 8, 16, 0.88);
+      backdrop-filter: blur(12px);
+      place-items: center;
+      padding: 28px 20px 20px;
+    }
+    .lightbox.is-open { display: grid; }
+    .lightbox-frame { width: min(1080px, 100%); }
+    .lightbox img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: calc(100vh - 150px);
+      margin: 0 auto;
+      border-radius: 18px;
+      object-fit: contain;
+    }
+    .lightbox-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .lightbox-bar p { margin: 0; font-family: var(--serif); font-size: 1.4rem; }
+    .lightbox-actions { display: flex; gap: 8px; }
+    .lightbox-actions button, .lightbox-close {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      z-index: 90;
+      transform: translateX(-50%) translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      background: #eef5ff;
+      color: #06101c;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 500;
+      transition: 0.25s ease;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 980px) {
+      .hero-grid, .split, .phases, .steps, .socials, .stats { grid-template-columns: 1fr 1fr; }
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .hero-art { order: -1; }
+      .portrait img { height: 420px; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+      }
+      .shot, .shot-portrait, .shot-silk, .shot-rose, .shot-window, .shot-balcony, .shot-vanity, .shot-poster {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 260px;
+      }
+      .shot-silk, .shot-poster { grid-column: 1 / -1; min-height: 220px; }
+      .phases { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 760px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: -20px;
+        right: -20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 8px 22px 18px;
+        background: rgba(6, 16, 28, 0.97);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-links.open { display: flex; }
+      .stats, .phases, .steps, .socials { grid-template-columns: 1fr; }
+      .ca-card { flex-wrap: wrap; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+      h1 { font-size: 4.4rem; }
+      section { padding: 64px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" aria-hidden="true">
+    <span style="--x:4%;--s:14px;--d:15s;--delay:-2s;--o:0.72;--c:#9fd4ff;--glow:rgba(120,190,255,.85)"><b></b></span>
+    <span style="--x:11%;--s:22px;--d:19s;--delay:-8s;--o:0.55;--c:#4da3ff;--glow:rgba(61,141,255,.9)"><b></b></span>
+    <span style="--x:18%;--s:11px;--d:13s;--delay:-4s;--o:0.8;--c:#d7eeff;--glow:rgba(180,220,255,.7)"><b></b></span>
+    <span style="--x:26%;--s:28px;--d:22s;--delay:-11s;--o:0.42;--c:#3d8dff;--glow:rgba(61,141,255,.95)"><b></b></span>
+    <span style="--x:34%;--s:16px;--d:16s;--delay:-6s;--o:0.7;--c:#7eb6ff;--glow:rgba(110,180,255,.85)"><b></b></span>
+    <span style="--x:42%;--s:12px;--d:14s;--delay:-1s;--o:0.78;--c:#b9dcff;--glow:rgba(150,200,255,.8)"><b></b></span>
+    <span style="--x:49%;--s:34px;--d:24s;--delay:-14s;--o:0.32;--c:#2f78ff;--glow:rgba(47,120,255,.9)"><b></b></span>
+    <span style="--x:57%;--s:18px;--d:17s;--delay:-9s;--o:0.64;--c:#8ecbff;--glow:rgba(142,203,255,.85)"><b></b></span>
+    <span style="--x:64%;--s:13px;--d:12s;--delay:-3s;--o:0.82;--c:#e7f4ff;--glow:rgba(190,225,255,.75)"><b></b></span>
+    <span style="--x:71%;--s:24px;--d:20s;--delay:-12s;--o:0.5;--c:#5b9fff;--glow:rgba(91,159,255,.9)"><b></b></span>
+    <span style="--x:78%;--s:15px;--d:15s;--delay:-5s;--o:0.74;--c:#9fd4ff;--glow:rgba(120,190,255,.85)"><b></b></span>
+    <span style="--x:85%;--s:30px;--d:23s;--delay:-16s;--o:0.36;--c:#3d8dff;--glow:rgba(61,141,255,.95)"><b></b></span>
+    <span style="--x:92%;--s:17px;--d:16s;--delay:-7s;--o:0.68;--c:#c5e6ff;--glow:rgba(160,210,255,.8)"><b></b></span>
+    <span style="--x:8%;--s:20px;--d:18s;--delay:-13s;--o:0.48;--c:#6eb6ff;--glow:rgba(110,182,255,.9)"><b></b></span>
+    <span style="--x:37%;--s:10px;--d:11s;--delay:-2.5s;--o:0.85;--c:#d7eeff;--glow:rgba(180,220,255,.7)"><b></b></span>
+    <span style="--x:68%;--s:26px;--d:21s;--delay:-10s;--o:0.4;--c:#4da3ff;--glow:rgba(77,163,255,.9)"><b></b></span>
+    <span style="--x:22%;--s:13px;--d:14s;--delay:-15s;--o:0.76;--c:#b7dcff;--glow:rgba(140,200,255,.8)"><b></b></span>
+    <span style="--x:88%;--s:12px;--d:13s;--delay:-4.5s;--o:0.8;--c:#9fd4ff;--glow:rgba(120,190,255,.85)"><b></b></span>
+  </div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
+        <img src="images/logo.png" alt="">
+        <strong>Super Model</strong>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+      <nav class="nav-links" id="nav-links">
+        <a href="#muse">Muse</a>
+        <a href="#token">Token</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#runway">Runway</a>
+        <a href="#buy">Buy</a>
+        <div class="nav-socials">
+          <a class="icon-btn" href="https://x.com/supermodelai" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="icon-btn" href="https://t.me/supermodelai" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.04 15.3 8.9 19.1c.4 0 .58-.17.8-.38l1.92-1.84 3.98 2.93c.73.4 1.25.19 1.45-.68l2.63-12.4c.24-1.1-.4-1.53-1.1-1.26L3.3 10.1c-1.07.42-1.05 1.02-.18 1.29l4.3 1.34 10-6.3c.47-.3.9-.14.55.2"/></svg>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow"><i></i> Romantic AI meme</p>
+          <h1>Super<br><em>Model</em></h1>
+          <p class="lede">One muse, one contract, sapphire light. The gallery is open. The address is still sealed.</p>
+          <div class="ca-card">
+            <div class="ca-meta">
+              <div class="ca-label"><span class="pulse"></span> Contract · $MODEL</div>
+              <code id="contract">0xcomingsoon</code>
+            </div>
+            <button class="btn btn-primary" type="button" data-copy>Copy CA</button>
+          </div>
+          <div class="actions">
+            <a class="btn btn-ghost" href="https://x.com/supermodelai" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              Twitter
+            </a>
+            <a class="btn btn-telegram" href="https://t.me/supermodelai" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.04 15.3 8.9 19.1c.4 0 .58-.17.8-.38l1.92-1.84 3.98 2.93c.73.4 1.25.19 1.45-.68l2.63-12.4c.24-1.1-.4-1.53-1.1-1.26L3.3 10.1c-1.07.42-1.05 1.02-.18 1.29l4.3 1.34 10-6.3c.47-.3.9-.14.55.2"/></svg>
+              Telegram
+            </a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="frame">
+            <img src="images/banner.png" alt="Super Model reclining in gold light, with the name in script">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <span>Super Model</span><b>0xcomingsoon</b><span>$MODEL</span><span>Romantic AI</span><span>Sapphire hour</span><span>Zero tax</span><span>Gallery open</span><span>Coming soon</span>
+        </div>
+        <div class="ticker-group">
+          <span>Super Model</span><b>0xcomingsoon</b><span>$MODEL</span><span>Romantic AI</span><span>Sapphire hour</span><span>Zero tax</span><span>Gallery open</span><span>Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="muse">
+      <div class="wrap split">
+        <div>
+          <p class="kicker">01 — The muse</p>
+          <h2>She keeps the room in blue.</h2>
+          <p class="sub">Super Model is a romantic AI meme built around one face: long dark hair, amber eyes, and a gold-lit calm. The chain gets the contract. The site keeps the after-hours gallery.</p>
+          <p class="sub">No tax theater. No fake countdown. When the address leaves “coming soon,” it will be the same string you can copy tonight.</p>
+        </div>
+        <div class="portrait">
+          <img src="images/gallery-portrait.jpg" alt="Close portrait of Super Model in warm light and rose petals">
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <blockquote>
+        <p>Hold the gaze. The contract follows.</p>
+      </blockquote>
+    </div>
+
+    <section id="token">
+      <div class="wrap">
+        <p class="kicker">02 — The contract</p>
+        <h2>Tokenomics</h2>
+        <p class="sub">A simple meme structure. The only number that matters right now is the contract, and it is still sealed.</p>
+        <div class="stats">
+          <article class="stat"><span>Ticker</span><b>$MODEL</b></article>
+          <article class="stat"><span>Supply</span><b>1,000,000,000</b></article>
+          <article class="stat"><span>Tax</span><b>0% / 0%</b></article>
+          <article class="stat"><span>Liquidity</span><b>Locked</b></article>
+          <article class="stat"><span>Chain</span><b>EVM</b></article>
+          <article class="stat"><span>Contract</span><b>0xcomingsoon</b></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <div class="gallery-head">
+          <div>
+            <p class="kicker">03 — The gallery</p>
+            <h2>After hours</h2>
+          </div>
+          <p class="sub">Seven frames. Click any still to open it.</p>
+        </div>
+        <div class="gallery-grid">
+          <button class="shot shot-portrait" type="button">
+            <img src="images/gallery-portrait.jpg" alt="Midnight glance beside a sapphire window">
+            <span>Midnight Glance</span>
+          </button>
+          <button class="shot shot-silk" type="button">
+            <img src="images/gallery-silk.jpg" alt="Super Model on white silk in candlelight">
+            <span>Silk &amp; Sapphire</span>
+          </button>
+          <button class="shot shot-rose" type="button">
+            <img src="images/gallery-rose.jpg" alt="Super Model holding a red rose">
+            <span>A Single Rose</span>
+          </button>
+          <button class="shot shot-window" type="button">
+            <img src="images/gallery-window.jpg" alt="Super Model seated by a neon city window">
+            <span>Window Light</span>
+          </button>
+          <button class="shot shot-balcony" type="button">
+            <img src="images/gallery-balcony.jpg" alt="Super Model on a moonlit balcony">
+            <span>City of Moons</span>
+          </button>
+          <button class="shot shot-vanity" type="button">
+            <img src="images/gallery-vanity.jpg" alt="Super Model at a candlelit vanity">
+            <span>Vanity Hour</span>
+          </button>
+          <button class="shot shot-poster" type="button">
+            <img src="images/poster.png" alt="Glamorous Super Model campaign poster">
+            <span>Campaign Still</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="runway">
+      <div class="wrap">
+        <p class="kicker">04 — The runway</p>
+        <h2>What happens next</h2>
+        <div class="phases">
+          <article class="phase">
+            <em>01</em>
+            <h3>The glance</h3>
+            <p>Art, site, and the first two rooms: Twitter and Telegram.</p>
+          </article>
+          <article class="phase">
+            <em>02</em>
+            <h3>The name</h3>
+            <p>The contract leaves 0xcomingsoon and becomes the real address.</p>
+          </article>
+          <article class="phase">
+            <em>03</em>
+            <h3>The runway</h3>
+            <p>Liquidity locked, supply fixed, the gallery stays public.</p>
+          </article>
+          <article class="phase">
+            <em>04</em>
+            <h3>The cover</h3>
+            <p>New frames, new nights, the same muse.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="buy">
+      <div class="wrap">
+        <p class="kicker">05 — The buy</p>
+        <h2>When the seal breaks</h2>
+        <div class="steps">
+          <article class="step">
+            <em>Step 01</em>
+            <h3>Get a wallet</h3>
+            <p>Any EVM wallet is enough. Nothing here asks you to connect one.</p>
+          </article>
+          <article class="step">
+            <em>Step 02</em>
+            <h3>Copy the CA</h3>
+            <p>Use the button. Until launch, the string is exactly 0xcomingsoon.</p>
+          </article>
+          <article class="step">
+            <em>Step 03</em>
+            <h3>Match it</h3>
+            <p>When a pool opens, the address you swap must match the one posted on Twitter and Telegram.</p>
+          </article>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" type="button" data-copy>Copy 0xcomingsoon</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="community">
+      <div class="wrap">
+        <p class="kicker">06 — The rooms</p>
+        <h2>Stay for the reveal</h2>
+        <div class="socials">
+          <a class="social-card" href="https://x.com/supermodelai" target="_blank" rel="noopener noreferrer">
+            <small>Twitter</small>
+            <strong>The timeline</strong>
+            <span>x.com/supermodelai</span>
+          </a>
+          <a class="social-card" href="https://t.me/supermodelai" target="_blank" rel="noopener noreferrer">
+            <small>Telegram</small>
+            <strong>The private room</strong>
+            <span>t.me/supermodelai</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>Super Model · romantic AI meme · 2026</span>
+      <span>CA <a href="#top">0xcomingsoon</a> · not financial advice</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image">
+    <button class="lightbox-close" type="button">Close</button>
+    <div class="lightbox-frame">
+      <img alt="">
+      <div class="lightbox-bar">
+        <p class="lightbox-cap"></p>
+        <div class="lightbox-actions">
+          <button type="button" data-prev>Prev</button>
+          <button type="button" data-next>Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toast" role="status">Contract copied</div>
+
+  <script>
+    const CA = "0xcomingsoon";
+    const toast = document.querySelector(".toast");
+    let toastTimer;
+
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(CA);
+        } catch (error) {
+          const area = document.createElement("textarea");
+          area.value = CA;
+          area.setAttribute("readonly", "");
+          area.style.position = "fixed";
+          area.style.left = "-9999px";
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+        }
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
+      });
+    });
+
+    const toggle = document.querySelector(".nav-toggle");
+    const links = document.querySelector(".nav-links");
+    toggle.addEventListener("click", () => {
+      const open = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+    links.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const shots = [...document.querySelectorAll(".shot")];
+    const lightbox = document.querySelector(".lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+    const lightboxCap = lightbox.querySelector(".lightbox-cap");
+    let current = 0;
+
+    function showShot(index) {
+      current = (index + shots.length) % shots.length;
+      const image = shots[current].querySelector("img");
+      lightboxImg.src = image.src;
+      lightboxImg.alt = image.alt;
+      lightboxCap.textContent = shots[current].querySelector("span").textContent;
+    }
+
+    function openShot(index) {
+      showShot(index);
+      lightbox.classList.add("is-open");
+      document.body.classList.add("lock");
+    }
+
+    function closeShot() {
+      lightbox.classList.remove("is-open");
+      document.body.classList.remove("lock");
+    }
+
+    shots.forEach((shot, index) => {
+      shot.addEventListener("click", () => openShot(index));
+    });
+    lightbox.querySelector(".lightbox-close").addEventListener("click", closeShot);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeShot();
+    });
+    lightbox.querySelector("[data-prev]").addEventListener("click", () => showShot(current - 1));
+    lightbox.querySelector("[data-next]").addEventListener("click", () => showShot(current + 1));
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("is-open")) return;
+      if (event.key === "Escape") closeShot();
+      if (event.key === "ArrowRight") showShot(current + 1);
+      if (event.key === "ArrowLeft") showShot(current - 1);
+    });
+  </script>
+</body>
+</html>
