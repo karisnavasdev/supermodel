@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Super Model — Romantic AI Meme</title>
-  <meta name="description" content="Super Model is a romantic AI meme. Contract: 0xcomingsoon.">
+  <meta name="description" content="Super Model ($SM) is a romantic AI meme on Base. Contract: 0x4f81f6ae802dec6c8e1846ad853019a5458186d1.">
   <link rel="icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -262,10 +262,14 @@
     @keyframes pulse {
       70% { box-shadow: 0 0 0 8px transparent; }
     }
+    .ca-meta { flex: 1; }
     .ca-card code {
       font-family: Consolas, "Cascadia Code", monospace;
-      font-size: 1.2rem;
+      font-size: 0.72rem;
+      letter-spacing: -0.03em;
       color: white;
+      line-height: 1.35;
+      white-space: nowrap;
     }
     .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
     .btn {
@@ -279,6 +283,7 @@
       text-decoration: none;
       font: inherit;
       font-weight: 500;
+      white-space: nowrap;
       cursor: pointer;
       color: var(--ink);
     }
@@ -395,6 +400,29 @@
       font-family: var(--serif);
       font-size: 2rem;
       font-weight: 500;
+    }
+    .stat b.mono {
+      font-family: Consolas, "Cascadia Code", monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .chart {
+      margin-top: 28px;
+      height: 620px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #0b1830;
+      box-shadow: var(--shadow);
+    }
+    .chart iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .gallery-head {
@@ -597,7 +625,10 @@
       }
       .nav-links.open { display: flex; }
       .stats, .phases, .steps, .socials { grid-template-columns: 1fr; }
+      .stat b.mono { white-space: normal; word-break: break-all; font-size: 0.85rem; }
       .ca-card { flex-wrap: wrap; }
+      .ca-card code { white-space: normal; word-break: break-all; font-size: 0.78rem; }
+      .chart { height: 520px; }
       .footer-row { flex-direction: column; align-items: flex-start; }
       h1 { font-size: 4.4rem; }
       section { padding: 64px 0; }
@@ -649,10 +680,10 @@
         <a href="#runway">Runway</a>
         <a href="#buy">Buy</a>
         <div class="nav-socials">
-          <a class="icon-btn" href="https://x.com/supermodelai" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <a class="icon-btn" href="https://x.com/supermodelbase" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
-          <a class="icon-btn" href="https://t.me/supermodelai" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <a class="icon-btn" href="https://t.me/supermodelbase" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.04 15.3 8.9 19.1c.4 0 .58-.17.8-.38l1.92-1.84 3.98 2.93c.73.4 1.25.19 1.45-.68l2.63-12.4c.24-1.1-.4-1.53-1.1-1.26L3.3 10.1c-1.07.42-1.05 1.02-.18 1.29l4.3 1.34 10-6.3c.47-.3.9-.14.55.2"/></svg>
           </a>
         </div>
@@ -666,20 +697,21 @@
         <div>
           <p class="eyebrow"><i></i> Romantic AI meme</p>
           <h1>Super<br><em>Model</em></h1>
-          <p class="lede">One muse, one contract, sapphire light. The gallery is open. The address is still sealed.</p>
+          <p class="lede">One muse, one contract, sapphire light. The gallery is open. $SM is live on Base.</p>
           <div class="ca-card">
             <div class="ca-meta">
-              <div class="ca-label"><span class="pulse"></span> Contract · $MODEL</div>
-              <code id="contract">0xcomingsoon</code>
+              <div class="ca-label"><span class="pulse"></span> Contract · $SM · Base</div>
+              <code id="contract">0x4f81f6ae802dec6c8e1846ad853019a5458186d1</code>
             </div>
             <button class="btn btn-primary" type="button" data-copy>Copy CA</button>
           </div>
           <div class="actions">
-            <a class="btn btn-ghost" href="https://x.com/supermodelai" target="_blank" rel="noopener noreferrer">
+            <a class="btn btn-primary" href="https://app.uniswap.org/swap?chain=base&amp;inputCurrency=ETH&amp;outputCurrency=0x4f81f6ae802dec6c8e1846ad853019a5458186d1" target="_blank" rel="noopener noreferrer">Buy now</a>
+            <a class="btn btn-ghost" href="https://x.com/supermodelbase" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               Twitter
             </a>
-            <a class="btn btn-telegram" href="https://t.me/supermodelai" target="_blank" rel="noopener noreferrer">
+            <a class="btn btn-telegram" href="https://t.me/supermodelbase" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.04 15.3 8.9 19.1c.4 0 .58-.17.8-.38l1.92-1.84 3.98 2.93c.73.4 1.25.19 1.45-.68l2.63-12.4c.24-1.1-.4-1.53-1.1-1.26L3.3 10.1c-1.07.42-1.05 1.02-.18 1.29l4.3 1.34 10-6.3c.47-.3.9-.14.55.2"/></svg>
               Telegram
             </a>
@@ -696,10 +728,10 @@
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
         <div class="ticker-group">
-          <span>Super Model</span><b>0xcomingsoon</b><span>$MODEL</span><span>Romantic AI</span><span>Sapphire hour</span><span>Zero tax</span><span>Gallery open</span><span>Coming soon</span>
+          <span>Super Model</span><b>$SM</b><span>Base</span><span>Romantic AI</span><span>Sapphire hour</span><span>Zero tax</span><span>Gallery open</span><span>Live now</span>
         </div>
         <div class="ticker-group">
-          <span>Super Model</span><b>0xcomingsoon</b><span>$MODEL</span><span>Romantic AI</span><span>Sapphire hour</span><span>Zero tax</span><span>Gallery open</span><span>Coming soon</span>
+          <span>Super Model</span><b>$SM</b><span>Base</span><span>Romantic AI</span><span>Sapphire hour</span><span>Zero tax</span><span>Gallery open</span><span>Live now</span>
         </div>
       </div>
     </div>
@@ -710,7 +742,7 @@
           <p class="kicker">01 — The muse</p>
           <h2>She keeps the room in blue.</h2>
           <p class="sub">Super Model is a romantic AI meme built around one face: long dark hair, amber eyes, and a gold-lit calm. The chain gets the contract. The site keeps the after-hours gallery.</p>
-          <p class="sub">No tax theater. No fake countdown. When the address leaves “coming soon,” it will be the same string you can copy tonight.</p>
+          <p class="sub">No tax theater. No fake countdown. The address on this page is the live contract on Base. Copy it, then match it before you buy.</p>
         </div>
         <div class="portrait">
           <img src="images/gallery-portrait.jpg" alt="Close portrait of Super Model in warm light and rose petals">
@@ -728,14 +760,14 @@
       <div class="wrap">
         <p class="kicker">02 — The contract</p>
         <h2>Tokenomics</h2>
-        <p class="sub">A simple meme structure. The only number that matters right now is the contract, and it is still sealed.</p>
+        <p class="sub">A simple meme structure. Live on Base. The contract below is the one to match.</p>
         <div class="stats">
-          <article class="stat"><span>Ticker</span><b>$MODEL</b></article>
+          <article class="stat"><span>Ticker</span><b>$SM</b></article>
           <article class="stat"><span>Supply</span><b>1,000,000,000</b></article>
           <article class="stat"><span>Tax</span><b>0% / 0%</b></article>
           <article class="stat"><span>Liquidity</span><b>Locked</b></article>
-          <article class="stat"><span>Chain</span><b>EVM</b></article>
-          <article class="stat"><span>Contract</span><b>0xcomingsoon</b></article>
+          <article class="stat"><span>Chain</span><b>Base</b></article>
+          <article class="stat"><span>Contract</span><b class="mono">0x4f81f6ae802dec6c8e1846ad853019a5458186d1</b></article>
         </div>
       </div>
     </section>
@@ -795,7 +827,7 @@
           <article class="phase">
             <em>02</em>
             <h3>The name</h3>
-            <p>The contract leaves 0xcomingsoon and becomes the real address.</p>
+            <p>The contract is public. The same address lives on the site, Twitter, and Telegram.</p>
           </article>
           <article class="phase">
             <em>03</em>
@@ -814,26 +846,34 @@
     <section id="buy">
       <div class="wrap">
         <p class="kicker">05 — The buy</p>
-        <h2>When the seal breaks</h2>
+        <h2>Buy $SM</h2>
+        <p class="sub">The chart is the Uniswap pool on Base. Buy only if the contract matches the one on this page.</p>
+        <div class="chart">
+          <iframe
+            title="Super Model DexScreener chart"
+            src="https://dexscreener.com/base/0x7d6a4db5242543a30e767986b900b4181018d912?embed=1&amp;loadChartSettings=0&amp;trades=0&amp;tabs=0&amp;info=0&amp;chartLeftToolbar=0&amp;chartDefaultOnMobile=1&amp;chartTheme=dark&amp;theme=dark&amp;chartStyle=1&amp;chartType=usd&amp;interval=15"
+          ></iframe>
+        </div>
         <div class="steps">
           <article class="step">
             <em>Step 01</em>
             <h3>Get a wallet</h3>
-            <p>Any EVM wallet is enough. Nothing here asks you to connect one.</p>
+            <p>A Base wallet with ETH is enough. Nothing here asks you to connect one.</p>
           </article>
           <article class="step">
             <em>Step 02</em>
             <h3>Copy the CA</h3>
-            <p>Use the button. Until launch, the string is exactly 0xcomingsoon.</p>
+            <p>0x4f81f6ae802dec6c8e1846ad853019a5458186d1</p>
           </article>
           <article class="step">
             <em>Step 03</em>
             <h3>Match it</h3>
-            <p>When a pool opens, the address you swap must match the one posted on Twitter and Telegram.</p>
+            <p>The address you swap must match the one posted on Twitter and Telegram.</p>
           </article>
         </div>
         <div class="actions">
-          <button class="btn btn-primary" type="button" data-copy>Copy 0xcomingsoon</button>
+          <a class="btn btn-primary" href="https://app.uniswap.org/swap?chain=base&amp;inputCurrency=ETH&amp;outputCurrency=0x4f81f6ae802dec6c8e1846ad853019a5458186d1" target="_blank" rel="noopener noreferrer">Buy now</a>
+          <button class="btn btn-ghost" type="button" data-copy>Copy CA</button>
         </div>
       </div>
     </section>
@@ -841,17 +881,17 @@
     <section id="community">
       <div class="wrap">
         <p class="kicker">06 — The rooms</p>
-        <h2>Stay for the reveal</h2>
+        <h2>Come inside</h2>
         <div class="socials">
-          <a class="social-card" href="https://x.com/supermodelai" target="_blank" rel="noopener noreferrer">
+          <a class="social-card" href="https://x.com/supermodelbase" target="_blank" rel="noopener noreferrer">
             <small>Twitter</small>
             <strong>The timeline</strong>
-            <span>x.com/supermodelai</span>
+            <span>x.com/supermodelbase</span>
           </a>
-          <a class="social-card" href="https://t.me/supermodelai" target="_blank" rel="noopener noreferrer">
+          <a class="social-card" href="https://t.me/supermodelbase" target="_blank" rel="noopener noreferrer">
             <small>Telegram</small>
             <strong>The private room</strong>
-            <span>t.me/supermodelai</span>
+            <span>t.me/supermodelbase</span>
           </a>
         </div>
       </div>
@@ -861,7 +901,7 @@
   <footer>
     <div class="wrap footer-row">
       <span>Super Model · romantic AI meme · 2026</span>
-      <span>CA <a href="#top">0xcomingsoon</a> · not financial advice</span>
+      <span>CA <a href="#buy">0x4f81f6ae802dec6c8e1846ad853019a5458186d1</a> · not financial advice</span>
     </div>
   </footer>
 
@@ -881,7 +921,7 @@
   <div class="toast" role="status">Contract copied</div>
 
   <script>
-    const CA = "0xcomingsoon";
+    const CA = "0x4f81f6ae802dec6c8e1846ad853019a5458186d1";
     const toast = document.querySelector(".toast");
     let toastTimer;
 
